@@ -1,8 +1,9 @@
 <!DOCTYPE html>
+<link href="/stylesheet.css" rel="stylesheet">
 <html>
   <body>
     <h1>Kitchen Configurator</h1>
-    <button onclick="sendFridge()">Place Fridge</button>
+    <button class="header1" onclick="sendFridge()">Place Fridge</button>
     <script>
       function sendFridge() {
         fetch('/send', {

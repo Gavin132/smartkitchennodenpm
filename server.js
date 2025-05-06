@@ -29,6 +29,7 @@ wss.on('connection', (ws, req) => {
 
 app.post('/send', (req, res) => {
   const { ip, payload } = req.body;
+  console.log(`Received payload from client:`, payload); // ← Add this
   const ws = clients.get(ip);
 
   if (ws && ws.readyState === WebSocket.OPEN) {
@@ -42,3 +43,4 @@ app.post('/send', (req, res) => {
 server.listen(PORT, () => {
   console.log(`Server + WebSocket running on http://localhost:${PORT}`);
 });
+
