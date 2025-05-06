@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h1>Kitchen Configurator</h1>
+    <button onclick="sendFridge()">Place Fridge</button>
+    <script>
+      function sendFridge() {
+        fetch('/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action: 'place_object',
+            type: 'fridge',
+            position: [1, 0, 2],
+            rotation: 90
+          })
+        });
+      }
+    </script>
+  </body>
+</html>
+
