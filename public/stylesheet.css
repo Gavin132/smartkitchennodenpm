@@ -10,9 +10,9 @@
 
 }
 
-.body {
-    background-color: black;
-    padding: 15%;
+body {
+padding-left: 50px;
+padding-top: 10px;
 }
 
 html *

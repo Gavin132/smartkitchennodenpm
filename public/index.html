@@ -32,10 +32,12 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          action: 'place_object',
           type: objecttype,
-          position: [x, y, z],
-          rotation: rotation
+          positionx: x,
+          positiony: y,
+          positionz: z,
+          rotation: rotation,
+          action: 'place_object',
         })
       });
     }

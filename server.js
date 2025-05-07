@@ -1,47 +1,41 @@
 const express = require('express');
-const WebSocket = require('ws');
 const http = require('http');
+const { Server } = require('socket.io'); // ← Socket.IO import
 
 const app = express();
 const server = http.createServer(app);
-const wss = new WebSocket.Server({ server });
+const io = new Server(server); // ← Create Socket.IO server
 
 const PORT = 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
-const clients = new Map(); // Map IPs to sockets
+let connectedClients = new Map();
 
-wss.on('connection', (ws, req) => {
-  const ip = req.socket.remoteAddress.replace(/^.*:/, ''); // strip IPv6 junk
-  console.log(`Quest connected from ${ip}`);
-  clients.set(ip, ws);
+io.on('connection', (socket) => {
+  const id = socket.id;
+  console.log(`Quest connected: ${id}`);
+  connectedClients.set(id, socket);
 
-  ws.on('close', () => {
-    clients.delete(ip);
-    console.log(`Quest at ${ip} disconnected`);
+  socket.on('disconnect', () => {
+    console.log(`Quest disconnected: ${id}`);
+    connectedClients.delete(id);
   });
 
-  ws.on('message', (msg) => {
-    console.log(`From ${ip}:`, msg.toString());
+  socket.on('pong', (msg) => {
+    console.log(`Got pong from ${id}:`, msg);
   });
 });
 
+// This now broadcasts to all connected Socket.IO clients
 app.post('/send', (req, res) => {
   const payload = req.body;
-  console.log(`Received payload from client:`, payload);
+  console.log(`Received payload:`, payload);
 
-  // optional: broadcast to all clients instead of one IP
-  for (const [ip, ws] of clients) {
-    if (ws.readyState === WebSocket.OPEN) {
-      ws.send(JSON.stringify(payload));
-    }
-  }
-
+  io.emit('kitchen_data', payload); // ← Send event to all clients
   res.send({ status: 'sent' });
 });
 
 server.listen(PORT, () => {
-  console.log(`Server + WebSocket running on http://localhost:${PORT}`);
+  console.log(`Server running at http://localhost:${PORT}`);
 });
-
