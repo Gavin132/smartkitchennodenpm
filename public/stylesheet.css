@@ -1,3 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css2?family=Poiret+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
+
+
+
 .header1 {
-    font-size: 250px;
+    font-size: 25px;
+
+}
+
+.body {
+    background-color: black;
+    padding: 15%;
+}
+
+html *
+{
+    font-family: "poppins", sans serif;
+    color: white;
+    background: black;
+}
+
+.flexdown {
+    display: flex;
+    flex-direction: column;
+
 }

@@ -28,16 +28,17 @@ wss.on('connection', (ws, req) => {
 });
 
 app.post('/send', (req, res) => {
-  const { ip, payload } = req.body;
-  console.log(`Received payload from client:`, payload); // ← Add this
-  const ws = clients.get(ip);
+  const payload = req.body;
+  console.log(`Received payload from client:`, payload);
 
-  if (ws && ws.readyState === WebSocket.OPEN) {
-    ws.send(JSON.stringify(payload));
-    res.send({ status: 'sent' });
-  } else {
-    res.status(500).send({ error: 'Client not connected' });
+  // optional: broadcast to all clients instead of one IP
+  for (const [ip, ws] of clients) {
+    if (ws.readyState === WebSocket.OPEN) {
+      ws.send(JSON.stringify(payload));
+    }
   }
+
+  res.send({ status: 'sent' });
 });
 
 server.listen(PORT, () => {
