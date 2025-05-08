@@ -1,3 +1,2 @@
 # **smart kitchen configurator**
-
-repository that contains a socket.io server running on node.js, website can send json arrays with the fields from the website
+repository that launches a socket.io server, website can send json arrays with the fields displayed on the website. Right now it sends an action place / break e.g. Also sends rotation and coordinates.
