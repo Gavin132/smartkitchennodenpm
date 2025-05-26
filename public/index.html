@@ -6,23 +6,42 @@
   <h1>Keuken Configurator</h1>
   <img style="height: 150px; margin-bottom:50px;" src="/smartkitchen.png">
   <div class="flexdown">
-    <label>X: <input id="posX" type="number" value="1"></label>
-    <label>Y: <input id="posY" type="number" value="0"></label>
-    <label>Z: <input id="posZ" type="number" value="2"></label>
+    <header>Kamer maten</header>
+    <label>hoogte in cm: <input id="height" type="number" value="0"></label>
+    <label>breedte in cm: <input id="width" type="number" value="0"></label>
+    <label>lengte in cm: <input id="length" type="number" value="0"></label>
+    <div style="padding: 20px;"></div>
+    <label>raam hoogte in cm: <input id="windowheight" type="number" value="0"></label>
+    <label>raam breedte in cm: <input id="windowwidth" type="number" value="0"></label>
+    <label>raam afstand van links in cm: <input id="windowdist" type="number" value="0"></label>
+  </div>
+  <button class="header1" onclick="sendKamer()">Maak kamer</button>
+
+
+  <div style="padding: 20px;"></div>
+
+
+  <div class="flexdown">
+    <header>Objecten</header>
+    <label>X: <input id="posX" type="number" value="-140"></label>
+    <label>Y: <input id="posY" type="number" value="-800"></label>
+    <label>Z: <input id="posZ" type="number" value="20"></label>
     <label>Rotation: <input id="rotation" type="number" value="90"></label>
     <label>Type:
       <select id="objectType">
-        <option value="fridge">Fridge</option>
-        <option value="oven">Oven</option>
-        <option value="sink">Sink</option>
-        <option value="cabinet">Cabinet</option>
+        <option value="Drawer">Drawer</option>
+        <option value="Cabinetdoor">Cabinetdoor</option>
+        <option value="Doorleft">Doorleft</option>
+        <option value="WMOkeuken">WMO Keuken</option>
       </select>
     </label>
   </div>
-  <button class="header1" onclick="sendFridge()">Plaats</button>
+  <button class="header1" onclick="sendTEST()">Plaats object</button>
+  <button class="header1" onclick="sendVerwijderObject()">Verwijder object</button>
+
 
   <script>
-    function sendFridge() {
+    function sendKeuken() {
       const x = parseFloat(document.getElementById('posX').value);
       const y = parseFloat(document.getElementById('posY').value);
       const z = parseFloat(document.getElementById('posZ').value);
@@ -38,12 +57,80 @@
           positiony: y,
           positionz: z,
           rotation: rotation,
+          action: 'place_object'
+        })
+      });
+    }
+
+    function sendKamer() {
+      const h = parseFloat(document.getElementById('height').value);
+      const w = parseFloat(document.getElementById('width').value);
+      const l = parseFloat(document.getElementById('length').value);
+      const wh = parseFloat(document.getElementById('windowheight').value);
+      const ww = parseFloat(document.getElementById('windowwidth').value);
+      const wl = parseFloat(document.getElementById('windowdist').value);
+
+      fetch('/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          height: h,
+          width: w,
+          length: l,
+          windowheight: wh,
+          windowwidth: ww,
+          windowdist: wl
+        })
+      });
+    }
+
+    function sendVerwijderObject() {
+      const x = parseFloat(document.getElementById('posX').value);
+      const y = parseFloat(document.getElementById('posY').value);
+      const z = parseFloat(document.getElementById('posZ').value);
+      const objecttype = (document.getElementById('objectType').value);
+
+      fetch('/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: objecttype,
+          positionx: x,
+          positiony: y,
+          positionz: z,
+          action: 'verwijder'
+        })
+      });
+    }
+
+    function sendTEST() {
+      const h = parseFloat(document.getElementById('height').value);
+      const w = parseFloat(document.getElementById('width').value);
+      const l = parseFloat(document.getElementById('length').value);
+      const x = parseFloat(document.getElementById('posX').value);
+      const y = parseFloat(document.getElementById('posY').value);
+      const z = parseFloat(document.getElementById('posZ').value);
+      const objecttype = (document.getElementById('objectType').value);
+      const rotation = parseFloat(document.getElementById('rotation').value);
+
+      fetch('/send', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          positionx: x,
+          positiony: y,
+          positionz: z,
+          rotation: rotation,
           action: 'place_object',
+          type: objecttype,
+          height: h,
+          width: w,
+          length: l
         })
       });
     }
   </script>
-  
+
 </body>
 
 </html>
