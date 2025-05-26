@@ -3,6 +3,7 @@
 <html>
 
 <body>
+  <div>
   <h1>Keuken Configurator</h1>
   <img style="height: 150px; margin-bottom:50px;" src="/smartkitchen.png">
   <div class="flexdown">
@@ -11,9 +12,11 @@
     <label>breedte in cm: <input id="width" type="number" value="0"></label>
     <label>lengte in cm: <input id="length" type="number" value="0"></label>
     <div style="padding: 20px;"></div>
+      <img style="height: 250px; width:250px; margin-bottom:50px;" src="/raamvoorbeeld.png">
     <label>raam hoogte in cm: <input id="windowheight" type="number" value="0"></label>
     <label>raam breedte in cm: <input id="windowwidth" type="number" value="0"></label>
     <label>raam afstand van links in cm: <input id="windowdist" type="number" value="0"></label>
+    <label>raam afstand tot vloer in cm: <input id="windowdistf" type="number" value="0"></label>
   </div>
   <button class="header1" onclick="sendKamer()">Maak kamer</button>
 
@@ -68,7 +71,8 @@
       const l = parseFloat(document.getElementById('length').value);
       const wh = parseFloat(document.getElementById('windowheight').value);
       const ww = parseFloat(document.getElementById('windowwidth').value);
-      const wl = parseFloat(document.getElementById('windowdist').value);
+      const wd = parseFloat(document.getElementById('windowdist').value);
+      const wdf = parseFloat(document.getElementById('windowdist').value);
 
       fetch('/send', {
         method: 'POST',
@@ -79,7 +83,8 @@
           length: l,
           windowheight: wh,
           windowwidth: ww,
-          windowdist: wl
+          windowdist: wd,
+          windowdistf: wdf
         })
       });
     }
