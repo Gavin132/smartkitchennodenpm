@@ -39,31 +39,11 @@
       </select>
     </label>
   </div>
-  <button class="header1" onclick="sendTEST()">Plaats object</button>
+  <button class="header1" onclick="sendKeuken()">Plaats object</button>
   <button class="header1" onclick="sendVerwijderObject()">Verwijder object</button>
 
 
   <script>
-    function sendKeuken() {
-      const x = parseFloat(document.getElementById('posX').value);
-      const y = parseFloat(document.getElementById('posY').value);
-      const z = parseFloat(document.getElementById('posZ').value);
-      const objecttype = (document.getElementById('objectType').value);
-      const rotation = parseFloat(document.getElementById('rotation').value);
-
-      fetch('/send', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: objecttype,
-          positionx: x,
-          positiony: y,
-          positionz: z,
-          rotation: rotation,
-          action: 'place_object'
-        })
-      });
-    }
 
     function sendKamer() {
       const h = parseFloat(document.getElementById('height').value);
@@ -108,7 +88,7 @@
       });
     }
 
-    function sendTEST() {
+    function sendKeuken() {
       const x = parseFloat(document.getElementById('posX').value);
       const y = parseFloat(document.getElementById('posY').value);
       const z = parseFloat(document.getElementById('posZ').value);
