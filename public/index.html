@@ -109,9 +109,6 @@
     }
 
     function sendTEST() {
-      const h = parseFloat(document.getElementById('height').value);
-      const w = parseFloat(document.getElementById('width').value);
-      const l = parseFloat(document.getElementById('length').value);
       const x = parseFloat(document.getElementById('posX').value);
       const y = parseFloat(document.getElementById('posY').value);
       const z = parseFloat(document.getElementById('posZ').value);
@@ -128,9 +125,6 @@
           rotation: rotation,
           action: 'place_object',
           type: objecttype,
-          height: h,
-          width: w,
-          length: l
         })
       });
     }
