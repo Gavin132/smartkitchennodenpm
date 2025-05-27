@@ -8,15 +8,20 @@
   <img style="height: 150px; margin-bottom:50px;" src="/smartkitchen.png">
   <div class="flexdown">
     <header>Kamer maten</header>
-    <label>hoogte in cm: <input id="height" type="number" value="260"></label>
-    <label>breedte in cm: <input id="width" type="number" value="239"></label>
-    <label>lengte in cm: <input id="length" type="number" value="378"></label>
+    <label>Hoogte in cm: <input id="height" type="number" value="260"></label>
+    <label>Breedte in cm: <input id="width" type="number" value="239"></label>
+    <label>Lengte in cm: <input id="length" type="number" value="378"></label>
     <div style="padding: 20px;"></div>
       <img style="height: 250px; width:250px; margin-bottom:50px;" src="/raamvoorbeeld.png">
-    <label>raam hoogte in cm: <input id="windowheight" type="number" value="210"></label>
-    <label>raam breedte in cm: <input id="windowwidth" type="number" value="90"></label>
-    <label>raam afstand van links in cm: <input id="windowdist" type="number" value="10"></label>
-    <label>raam afstand tot vloer in cm: <input id="windowdistf" type="number" value="10"></label>
+    <label>Raam hoogte in cm: <input id="windowheight" type="number" value="210"></label>
+    <label>Raam breedte in cm: <input id="windowwidth" type="number" value="90"></label>
+    <label>Raam afstand van links in cm: <input id="windowdist" type="number" value="10"></label>
+    <label>Eaam afstand tot vloer in cm: <input id="windowdistf" type="number" value="10"></label>
+    <label>Vensterbank diepte in cm: <input id="vensterbankdiepte" type="number" value="15"></label>
+    <label>Vensterbank dikte in cm: <input id="vensterbankhoogte" type="number" value="5"></label>
+    <label>Deurhoogte in cm: <input id="deurhoogte" type="number" value="210"></label>
+    <label>Deurbreedte in cm: <input id="deurbreedte" type="number" value="90"></label>
+    <label>Deurafstand van de muur in cm: <input id="deurafstand" type="number" value="50"></label>
   </div>
   <button class="header1" onclick="sendKamer()">Maak kamer</button>
 
@@ -53,6 +58,11 @@
       const ww = parseFloat(document.getElementById('windowwidth').value);
       const wd = parseFloat(document.getElementById('windowdist').value);
       const wdf = parseFloat(document.getElementById('windowdist').value);
+      const vbd = parseFloat(document.getElementById('vensterbankdiepte').value);
+      const vbh = parseFloat(document.getElementById('vensterbankhoogte').value);
+      const dh = parseFloat(document.getElementById('deurhoogte').value);
+      const da = parseFloat(document.getElementById('deurafstand').value);
+      const db = parseFloat(document.getElementById('deurbreedte').value);
 
       fetch('/send', {
         method: 'POST',
@@ -64,7 +74,12 @@
           windowheight: wh,
           windowwidth: ww,
           windowdist: wd,
-          windowdistf: wdf
+          windowdistf: wdf,
+          vensterbankdiepte: vbd,
+          vensterbankhoogte: vbh,
+          deurhoogte: dh,
+          deurafstand: da,
+          deurbreedte: db
         })
       });
     }
