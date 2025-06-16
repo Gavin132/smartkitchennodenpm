@@ -3,54 +3,68 @@
 <html>
 
 <body>
-  <div>
-  <h1>Keuken Configurator</h1>
-  <img style="height: 150px; margin-bottom:50px;" src="/smartkitchen.png">
-  <div class="flexdown">
-    <header>Kamer maten</header>
-    <label>Hoogte in cm: <input id="height" type="number" value="260"></label>
-    <label>Breedte in cm: <input id="width" type="number" value="239"></label>
-    <label>Lengte in cm: <input id="length" type="number" value="378"></label>
-    <div style="padding: 20px;"></div>
-      <img style="height: 250px; width:250px; margin-bottom:50px;" src="/raamvoorbeeld.png">
-    <label>Raam hoogte in cm: <input id="windowheight" type="number" value="210"></label>
-    <label>Raam breedte in cm: <input id="windowwidth" type="number" value="90"></label>
-    <label>Raam afstand van links in cm: <input id="windowdist" type="number" value="10"></label>
-    <label>Raam afstand tot vloer in cm: <input id="windowdistf" type="number" value="10"></label>
-    <label>Vensterbank diepte in cm: <input id="vensterbankdiepte" type="number" value="15"></label>
-    <label>Vensterbank dikte in cm: <input id="vensterbankhoogte" type="number" value="5"></label>
-    <label>Deurhoogte in cm: <input id="deurhoogte" type="number" value="210"></label>
-    <label>Deurbreedte in cm: <input id="deurbreedte" type="number" value="90"></label>
-    <label>Deurafstand van de muur in cm: <input id="deurafstand" type="number" value="50"></label>
+  <div class="container">
+    <h1 class="header1">Keuken Configurator</h1>
+    <!-- <img style="height: 120px; margin-bottom:30px; display:block; margin-left:auto; margin-right:auto;" src="/smartkitchen.png"> -->
+
+    <div class="main-flexrow">
+      <div class="left-columns">
+        <div class="flexcol">
+          <div class="card">
+            <header>Kamer maten</header>
+            <label>Hoogte in cm: <input id="height" type="number" value="260"></label>
+            <label>Breedte in cm: <input id="width" type="number" value="239"></label>
+            <label>Lengte in cm: <input id="length" type="number" value="378"></label>
+          </div>
+          <div class="card">
+            <header>Deur</header>
+            <label>Hoogte in cm: <input id="deurhoogte" type="number" value="210"></label>
+            <label>Breedte in cm: <input id="deurbreedte" type="number" value="90"></label>
+            <label>Afstand van de muur in cm: <input id="deurafstand" type="number" value="50"></label>
+          </div>
+        </div>
+        <div class="flexcol">
+          <div class="card">
+            <header>Raam</header>
+            <img style="height: 90px; width:90px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;" src="/raamvoorbeeld.png">
+            <label>Hoogte in cm: <input id="windowheight" type="number" value="210"></label>
+            <label>Breedte in cm: <input id="windowwidth" type="number" value="90"></label>
+            <label>Afstand van links in cm: <input id="windowdist" type="number" value="10"></label>
+            <label>Afstand tot vloer in cm: <input id="windowdistf" type="number" value="10"></label>
+            <label>Vensterbank diepte in cm: <input id="vensterbankdiepte" type="number" value="15"></label>
+            <label>Vensterbank dikte in cm: <input id="vensterbankhoogte" type="number" value="5"></label>
+          </div>
+        </div>
+        <div class="preview-section">
+          <canvas id="roomPreview" width="600" height="600" style="display:block; margin: 0 auto; background: #223860; border-radius: 12px; box-shadow: 0 2px 12px rgba(30,60,114,0.18);"></canvas>
+        </div>
+      </div>
+      <div class="objecten-col">
+        <div class="card">
+          <header>Objecten</header>
+          <label>X: <input id="posX" type="number" value="0"></label>
+          <label>Y: <input id="posY" type="number" value="0"></label>
+          <label>Z: <input id="posZ" type="number" value="0"></label>
+          <label>Rotatie: <input id="rotation" type="number" value="0"></label>
+          <label>Type:
+            <select id="objectType">
+              <option value="Drawer">Drawer</option>
+              <option value="Cabinetdoor">Cabinetdoor</option>
+              <option value="Doorleft">Doorleft</option>
+              <option value="WMOkeuken">WMO Keuken</option>
+              <option value="WMOkeuken2">WMO Keuken 2</option>
+              <option value="studentkeuken1">Studenten keuken 1</option>
+              <option value="studentkeuken2">Studenten keuken 2</option>
+            </select>
+          </label>
+          <button class="btn" style="width:100%;" onclick="sendKeuken()">Plaats object</button>
+          <button class="btn" style="width:100%; margin-top:10px;" onclick="sendVerwijderObject()">Verwijder object</button>
+        </div>
+      </div>
+    </div>
+    <!-- Button below the columns -->
+    <button class="btn" style="width:100%; margin: 32px 0 0 0;" onclick="sendKamer()">Maak kamer</button>
   </div>
-  <button class="header1" onclick="sendKamer()">Maak kamer</button>
-
-
-  <div style="padding: 20px;"></div>
-
-
-  <div class="flexdown">
-    <header>Objecten</header>
-    <label>X: <input id="posX" type="number" value="0"></label>
-    <label>Y: <input id="posY" type="number" value="0"></label>
-    <label>Z: <input id="posZ" type="number" value="0"></label>
-    <label>Rotation: <input id="rotation" type="number" value="0"></label>
-    <label>Type:
-      <select id="objectType">
-        <option value="Drawer">Drawer</option>
-        <option value="Cabinetdoor">Cabinetdoor</option>
-        <option value="Doorleft">Doorleft</option>
-        <option value="WMOkeuken">WMO Keuken</option>
-        <option value="WMOkeuken2">WMO Keuken 2</option>
-        <option value="studentkeuken1">Studenten keuken 1</option>
-        <option value="studentkeuken2">Studenten keuken 2</option>
-      </select>
-    </label>
-  </div>
-  <button class="header1" onclick="sendKeuken()">Plaats object</button>
-  <button class="header1" onclick="sendVerwijderObject()">Verwijder object</button>
-
-
   <script>
 
     function sendKamer() {
@@ -126,6 +140,84 @@
         })
       });
     }
+
+    function drawRoomPreview() {
+      const canvas = document.getElementById('roomPreview');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Get values
+      const roomW = parseFloat(document.getElementById('width').value) || 1;
+      const roomL = parseFloat(document.getElementById('length').value) || 1;
+      const windowW = parseFloat(document.getElementById('windowwidth').value) || 0;
+      const windowDist = parseFloat(document.getElementById('windowdist').value) || 0;
+      const doorW = parseFloat(document.getElementById('deurbreedte').value) || 0;
+      const doorDist = parseFloat(document.getElementById('deurafstand').value) || 0;
+
+      // Margins and scaling
+      const margin = 40;
+      const scaleW = (canvas.width - 2 * margin) / roomW;
+      const scaleL = (canvas.height - 2 * margin) / roomL;
+      const scale = Math.min(scaleW, scaleL);
+
+      // Room rectangle
+      const roomPxW = roomW * scale;
+      const roomPxL = roomL * scale;
+      const offsetX = (canvas.width - roomPxW) / 2;
+      const offsetY = (canvas.height - roomPxL) / 2;
+
+      // Draw room
+      ctx.save();
+      ctx.strokeStyle = "#4fc3f7";
+      ctx.lineWidth = 4;
+      ctx.strokeRect(offsetX, offsetY, roomPxW, roomPxL);
+
+      // Draw window (on top wall)
+      if (windowW > 0) {
+        ctx.strokeStyle = "#81d4fa";
+        ctx.lineWidth = 8;
+        const winX = offsetX + windowDist * scale;
+        const winY = offsetY - 4;
+        const winW = windowW * scale;
+        ctx.beginPath();
+        ctx.moveTo(winX, winY);
+        ctx.lineTo(winX + winW, winY);
+        ctx.stroke();
+      }
+
+      // Draw door (on left wall)
+      if (doorW > 0) {
+        ctx.strokeStyle = "#1976d2";
+        ctx.lineWidth = 8;
+        const doorY = offsetY + doorDist * scale;
+        const doorX = offsetX - 4;
+        const doorH = doorW * scale;
+        ctx.beginPath();
+        ctx.moveTo(doorX, doorY);
+        ctx.lineTo(doorX, doorY + doorH);
+        ctx.stroke();
+      }
+
+      // Add labels
+      ctx.fillStyle = "#eaf6ff";
+      ctx.font = "bold 16px Poppins, sans-serif";
+      ctx.fillText("Bovenaanzicht", 16, 28);
+
+      ctx.restore();
+    }
+
+    // Update preview on input change
+    const previewInputs = [
+      'width', 'length', 'windowwidth', 'windowdist', 'deurbreedte', 'deurafstand'
+    ];
+    previewInputs.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.addEventListener('input', drawRoomPreview);
+    });
+
+    // Draw once on load
+    window.addEventListener('DOMContentLoaded', drawRoomPreview);
   </script>
 
 </body>
