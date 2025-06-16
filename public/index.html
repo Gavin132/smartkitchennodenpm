@@ -26,7 +26,9 @@
         <div class="flexcol">
           <div class="card">
             <header>Raam</header>
-            <img style="height: 90px; width:90px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;" src="/raamvoorbeeld.png">
+            <img
+              style="height: 90px; width:90px; margin-bottom:20px; display:block; margin-left:auto; margin-right:auto;"
+              src="/raamvoorbeeld.png">
             <label>Hoogte in cm: <input id="windowheight" type="number" value="210"></label>
             <label>Breedte in cm: <input id="windowwidth" type="number" value="90"></label>
             <label>Afstand van links in cm: <input id="windowdist" type="number" value="10"></label>
@@ -36,7 +38,8 @@
           </div>
         </div>
         <div class="preview-section">
-          <canvas id="roomPreview" width="600" height="600" style="display:block; margin: 0 auto; background: #223860; border-radius: 12px; box-shadow: 0 2px 12px rgba(30,60,114,0.18);"></canvas>
+          <canvas id="roomPreview" width="600" height="600"
+            style="display:block; margin: 0 auto; background: #223860; border-radius: 12px; box-shadow: 0 2px 12px rgba(30,60,114,0.18);"></canvas>
         </div>
       </div>
       <div class="objecten-col">
@@ -51,14 +54,18 @@
               <option value="Drawer">Drawer</option>
               <option value="Cabinetdoor">Cabinetdoor</option>
               <option value="Doorleft">Doorleft</option>
+              <option value="hoekkeukens2">!Hoekkeuken</option>
+              <option value="Keukenbladhoogte">!Hoekkeuken-blad</option>
+              <option value="cabinet">!Hoekkeuken-cabinet</option>
               <option value="WMOkeuken">WMO Keuken</option>
-              <option value="WMOkeuken2">WMO Keuken 2</option>
+              <option value="WMOkeuken2">!WMO Keuken 2</option>
               <option value="studentkeuken1">Studenten keuken 1</option>
               <option value="studentkeuken2">Studenten keuken 2</option>
             </select>
           </label>
           <button class="btn" style="width:100%;" onclick="sendKeuken()">Plaats object</button>
-          <button class="btn" style="width:100%; margin-top:10px;" onclick="sendVerwijderObject()">Verwijder object</button>
+          <button class="btn" style="width:100%; margin-top:10px;" onclick="sendVerwijderObject()">Verwijder
+            object</button>
         </div>
       </div>
     </div>
